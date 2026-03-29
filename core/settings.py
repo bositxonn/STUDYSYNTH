@@ -189,7 +189,6 @@ JAZZMIN_UI_TWEAKS = {
         "success": "btn-success"
     }
 }
-}
 
 
 MEDIA_URL = '/media/'
