@@ -1,8 +1,5 @@
 {% extends 'base.html' %}
 {% block title %}{{ course.title }} - StudySynth{% endblock %}
-{% block extra_head %}
-<!-- some specific css -->
-{% endblock %}
 {% block content %}
 <div
     style="background: var(--card-bg); border-radius: 16px; padding: 3rem; border: 1px solid rgba(255,255,255,0.05); backdrop-filter: blur(12px);">
@@ -19,13 +16,12 @@
         <li
             style="margin: 1rem 0; padding: 1.5rem; background: rgba(0,0,0,0.2); border-radius: 8px; display: flex; justify-content: space-between; align-items: center; border: 1px solid rgba(255,255,255,0.05);">
             <div>
-                <h4 style="margin: 0; font-size: 1.2rem; color:white;">Lesson {{ lesson.order }}: {{ lesson.title }}
-                </h4>
+                <h4 style="margin: 0; font-size: 1.2rem; color:white;">{{ lesson.title }}</h4>
             </div>
-            <a href="{% url 'lesson-detail' lesson.id %}" class="btn-primary">Watch Lesson</a>
+            <a href="{% url 'lesson-detail' lesson.id %}" class="btn-primary">Darsni Boshlash</a>
         </li>
         {% empty %}
-        <p style="color: #94a3b8;">Lessons are currently being synthesized by AI...</p>
+        <p style="color: #94a3b8;">Darslar ro'yxati hozircha bo'sh...</p>
         {% endfor %}
     </ul>
 </div>
