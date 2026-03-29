@@ -1,51 +1,42 @@
-# RUSSIAN TRANSLATIONS
 msgid ""
 msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Language: ru\n"
 
-msgid "Get Started"
-msgstr "Начать"
+msgid "StudySynth - Premium Learning"
+msgstr "StudySynth - Премиум Обучение"
 
-msgid "Login"
-msgstr "Войти"
-
-msgid "Logout"
-msgstr "Выйти"
+msgid "Toggle Theme"
+msgstr "Переключить тему"
 
 msgid "Dashboard"
 msgstr "Панель управления"
 
-msgid "Chegarasiz Ta'lim: Barcha Yo'nalishlar Bir Joyda"
-msgstr "Безграничное Образование: Все Направления в Одном Месте"
+msgid "Logout"
+msgstr "Выйти"
 
-msgid "Barcha Yo'nalishlar"
-msgstr "Все Направления"
-
-msgid "Darsni Boshlash"
-msgstr "Начать Урок"
-
-msgid "Course Curriculum"
-msgstr "Учебная программа"
-
-msgid "Start Assessment"
-msgstr "Начать Тест"
-
-msgid "Submit Final Answers"
-msgstr "Отправить Ответы"
-
-msgid "Welcome Back"
-msgstr "Добро пожаловать"
-
-msgid "Secure Login"
+msgid "Login"
 msgstr "Войти"
 
-msgid "Create Your Account"
-msgstr "Создать Аккаунт"
+msgid "Get Started"
+msgstr "Начать"
 
-msgid "Unlock Platform"
-msgstr "Зарегистрироваться"
+msgid "StudySynth - Limitless Learning Platform"
+msgstr "StudySynth - Платформа Безграничного Обучения"
 
-msgid "StudySynth"
-msgstr "StudySynth"
+msgid "Limitless Learning: All Fields in One Place"
+msgstr "Безграничное Обучение: Все Направления в Одном Месте"
+
+msgid "Build your future! Master everything from programming and science to business and arts, empowered by AI-driven assessments."
+msgstr "Стройте свое будущее! Осваивайте все: от программирования и науки до бизнеса и искусств с помощью тестов на базе ИИ."
+
+msgid "All Fields"
+msgstr "Все Направления"
+
+msgid "Explore Course"
+msgstr "Подробнее о курсе"
+
+msgid "No courses found yet. Check back soon!"
+msgstr "Курсы пока не найдены. Заходите позже!"
+

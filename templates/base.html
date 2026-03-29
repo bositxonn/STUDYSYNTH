@@ -1,11 +1,11 @@
 ﻿{% load i18n %}
 <!DOCTYPE html>
-<html lang="en">
+<html lang="{{ LANGUAGE_CODE }}">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{% block title %}StudySynth - Premium Learning{% endblock %}</title>
+    <title>{% block title %}{% trans "StudySynth - Premium Learning" %}{% endblock %}</title>
     <style>
         :root {
             --bg-color: #0f172a;
@@ -18,36 +18,31 @@
         [data-theme="light"] {
             --bg-color: #f1f5f9;
             --text-color: #0f172a;
-            --card-bg: rgba(255, 255, 255, 0.9);
-            --accent-primary: #3b82f6;
-            --accent-glow: rgba(59, 130, 246, 0.3);
+            --card-bg: rgba(255, 255, 255, 0.95);
+            --accent-primary: #2563eb;
+            --accent-glow: rgba(37, 99, 235, 0.2);
         }
 
-        /* Ensure all text is visible in light mode */
-        [data-theme="light"] .course-title,
-        [data-theme="light"] .course-card,
+        /* Essential Light Mode Contrast Fixes */
         [data-theme="light"] h1,
         [data-theme="light"] h2,
         [data-theme="light"] h3,
         [data-theme="light"] h4,
         [data-theme="light"] p,
         [data-theme="light"] li,
-        [data-theme="light"] label {
+        [data-theme="light"] a:not(.btn-primary) {
             color: #0f172a !important;
         }
 
-        [data-theme="light"] .course-desc,
-        [data-theme="light"] .hero p {
-            color: #475569 !important;
-        }
-
-        [data-theme="light"] .course-card {
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
-            border-color: rgba(0, 0, 0, 0.07) !important;
-        }
-
-        [data-theme="light"] .lesson-item h4 {
+        [data-theme="light"] .hero h2 {
+            background: none !important;
+            -webkit-text-fill-color: #0f172a !important;
             color: #0f172a !important;
+        }
+
+        [data-theme="light"] .hero p,
+        [data-theme="light"] .course-desc {
+            color: #334155 !important;
         }
 
         body {
@@ -55,7 +50,7 @@
             padding: 0;
             background-color: var(--bg-color);
             color: var(--text-color);
-            font-family: 'Inter', system-ui, sans-serif;
+            font-family: 'Inter', system-ui, -apple-system, sans-serif;
             background-image: radial-gradient(circle at top right, #1e1b4b, transparent 40%),
                 radial-gradient(circle at bottom left, #064e3b, transparent 40%);
             min-height: 100vh;
@@ -79,11 +74,11 @@
             border-bottom: 1px solid rgba(255, 255, 255, 0.1);
             position: sticky;
             top: 0;
-            z-index: 100;
+            z-index: 1000;
         }
 
         [data-theme="light"] nav {
-            background: rgba(255, 255, 255, 0.8);
+            background: rgba(255, 255, 255, 0.85);
             border-bottom: 1px solid rgba(0, 0, 0, 0.1);
         }
 
@@ -99,8 +94,8 @@
         nav a {
             color: var(--text-color);
             text-decoration: none;
-            margin-left: 1.5rem;
-            transition: color 0.2s;
+            margin-left: 1.2rem;
+            transition: all 0.2s;
             font-weight: 500;
         }
 
@@ -112,18 +107,19 @@
             background: var(--accent-primary);
             color: white !important;
             border: none;
-            padding: 0.6rem 1.2rem;
+            padding: 0.6rem 1.4rem;
             border-radius: 8px;
             cursor: pointer;
             text-decoration: none;
-            box-shadow: 0 0 15px var(--accent-glow);
+            box-shadow: 0 4px 12px var(--accent-glow);
             transition: all 0.3s ease;
             display: inline-block;
+            font-weight: 600;
         }
 
         .btn-primary:hover {
             transform: translateY(-2px);
-            box-shadow: 0 0 25px var(--accent-glow);
+            box-shadow: 0 6px 20px var(--accent-glow);
         }
 
         .nav-controls {
@@ -133,90 +129,81 @@
         }
 
         .theme-btn {
-            background: transparent;
-            border: 1px solid rgba(255, 255, 255, 0.2);
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
             color: var(--text-color);
-            font-size: 1rem;
+            font-size: 1.1rem;
             cursor: pointer;
             border-radius: 8px;
-            padding: 0.4rem 0.7rem;
+            padding: 0.4rem 0.8rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
             transition: all 0.2s;
-        }
-
-        .theme-btn:hover {
-            background: rgba(255, 255, 255, 0.1);
         }
 
         [data-theme="light"] .theme-btn {
-            border-color: rgba(0, 0, 0, 0.15);
+            background: rgba(0, 0, 0, 0.05);
+            border-color: rgba(0, 0, 0, 0.1);
         }
 
         .lang-select {
-            background: rgba(255, 255, 255, 0.07);
+            background: rgba(255, 255, 255, 0.05);
             color: var(--text-color);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            padding: 0.4rem 0.6rem;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 0.5rem;
             border-radius: 8px;
-            outline: none;
             cursor: pointer;
             font-size: 0.9rem;
-            transition: all 0.2s;
         }
 
         [data-theme="light"] .lang-select {
             background: white;
-            border-color: rgba(0, 0, 0, 0.15);
+            border-color: rgba(0, 0, 0, 0.1);
             color: #0f172a;
         }
 
         .lang-select option {
-            color: black;
+            color: #0f172a;
             background: white;
         }
 
         main {
             flex: 1;
-            padding: 3rem;
+            padding: 3rem 2rem;
             max-width: 1200px;
             margin: 0 auto;
             width: 100%;
             box-sizing: border-box;
         }
-
-        .badge {
-            display: inline-block;
-        }
     </style>
     {% block extra_head %}{% endblock %}
 </head>
 
-<body>
+<body data-theme="dark">
     <nav>
         <a href="{% url 'home' %}" class="brand">StudySynth</a>
 
         <div class="nav-controls">
-            <!-- Theme Toggle -->
-            <button class="theme-btn" id="theme-toggle" title="Toggle Dark/Light Mode">рџЊ“</button>
+            <button class="theme-btn" id="theme-toggle" title="{% trans 'Toggle Theme' %}">&#127763;</button>
 
-            <!-- Language Switcher -->
             <form action="{% url 'set_language' %}" method="post" id="lang-form">
                 {% csrf_token %}
                 <input name="next" type="hidden" value="{{ request.path }}">
                 {% get_current_language as CURRENT_LANG %}
                 {% get_available_languages as LANGUAGES %}
-                <select name="language" class="lang-select" onchange="document.getElementById('lang-form').submit()">
+                <select name="language" class="lang-select" onchange="this.form.submit()">
                     {% for lang_code, lang_name in LANGUAGES %}
-                    <option value="{{ lang_code }}" {% if lang_code == CURRENT_LANG %} selected{% endif %}>
+                    <option value="{{ lang_code }}" {% if lang_code==CURRENT_LANG %}selected{% endif %}>
                         {{ lang_name }}
                     </option>
                     {% endfor %}
                 </select>
             </form>
 
-            <!-- Auth Links -->
             {% if user.is_authenticated %}
             <a href="/admin/">{% trans "Dashboard" %}</a>
-            <a href="{% url 'logout' %}">{% trans "Logout" %} ({{ user.username }})</a>
+            <a href="{% url 'logout' %}">{% trans "Logout" %}</a>
             {% else %}
             <a href="{% url 'login' %}">{% trans "Login" %}</a>
             <a href="{% url 'register' %}" class="btn-primary">{% trans "Get Started" %}</a>
@@ -225,23 +212,28 @@
     </nav>
 
     <main>
-        {% block content %}
-        {% endblock %}
+        {% block content %}{% endblock %}
     </main>
 
     <script>
         const themeBtn = document.getElementById('theme-toggle');
         const root = document.documentElement;
+        const body = document.body;
+
+        const updateThemeUI = (theme) => {
+            root.setAttribute('data-theme', theme);
+            body.setAttribute('data-theme', theme);
+            themeBtn.innerHTML = theme === 'dark' ? '&#9728;&#65039;' : '&#127769;';
+        };
+
         const savedTheme = localStorage.getItem('studysynth_theme') || 'dark';
-        root.setAttribute('data-theme', savedTheme);
-        themeBtn.innerHTML = savedTheme === 'dark' ? 'вЂпёЏ' : 'рџЊ™';
+        updateThemeUI(savedTheme);
 
         themeBtn.addEventListener('click', () => {
             const current = root.getAttribute('data-theme');
             const next = current === 'dark' ? 'light' : 'dark';
-            root.setAttribute('data-theme', next);
+            updateThemeUI(next);
             localStorage.setItem('studysynth_theme', next);
-            themeBtn.innerHTML = next === 'dark' ? 'вЂпёЏ' : 'рџЊ™';
         });
     </script>
 </body>
