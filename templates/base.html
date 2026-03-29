@@ -215,11 +215,11 @@
 
             <!-- Auth Links -->
             {% if user.is_authenticated %}
-            <a href="/admin/">Dashboard</a>
-            <a href="{% url 'logout' %}">Logout ({{ user.username }})</a>
+            <a href="/admin/">{% trans "Dashboard" %}</a>
+            <a href="{% url 'logout' %}">{% trans "Logout" %} ({{ user.username }})</a>
             {% else %}
-            <a href="{% url 'login' %}">Login</a>
-            <a href="{% url 'register' %}" class="btn-primary">Get Started</a>
+            <a href="{% url 'login' %}">{% trans "Login" %}</a>
+            <a href="{% url 'register' %}" class="btn-primary">{% trans "Get Started" %}</a>
             {% endif %}
         </div>
     </nav>
@@ -234,14 +234,14 @@
         const root = document.documentElement;
         const savedTheme = localStorage.getItem('studysynth_theme') || 'dark';
         root.setAttribute('data-theme', savedTheme);
-        themeBtn.textContent = savedTheme === 'dark' ? 'вЂпёЏ' : 'рџЊ™';
+        themeBtn.innerHTML = savedTheme === 'dark' ? 'вЂпёЏ' : 'рџЊ™';
 
         themeBtn.addEventListener('click', () => {
             const current = root.getAttribute('data-theme');
             const next = current === 'dark' ? 'light' : 'dark';
             root.setAttribute('data-theme', next);
             localStorage.setItem('studysynth_theme', next);
-            themeBtn.textContent = next === 'dark' ? 'вЂпёЏ' : 'рџЊ™';
+            themeBtn.innerHTML = next === 'dark' ? 'вЂпёЏ' : 'рџЊ™';
         });
     </script>
 </body>
