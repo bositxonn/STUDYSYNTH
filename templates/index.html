@@ -1,236 +1,123 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>StudySynth - Premium Learning</title>
-    <style>
-        /* Beautiful Premium CSS */
-        :root {
-            --bg-color: #0f172a;
-            --text-color: #f8fafc;
-            --accent-primary: #3b82f6;
-            --accent-glow: rgba(59, 130, 246, 0.4);
-            --card-bg: rgba(30, 41, 59, 0.7);
-        }
-        body {
-            margin: 0; padding: 0;
-            background-color: var(--bg-color);
-            color: var(--text-color);
-            font-family: 'Inter', system-ui, sans-serif;
-            background-image: radial-gradient(circle at top right, #1e1b4b, transparent 40%),
-                              radial-gradient(circle at bottom left, #064e3b, transparent 40%);
-            min-height: 100vh;
-        }
-        nav {
-            padding: 1.5rem 3rem;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            background: rgba(15, 23, 42, 0.5);
-            backdrop-filter: blur(10px);
-            border-bottom: 1px solid rgba(255,255,255,0.1);
-            position: sticky;
-            top: 0;
-            z-index: 50;
-        }
-        nav h1 { margin: 0; font-size: 1.5rem; background: linear-gradient(to right, #38bdf8, #818cf8); -webkit-background-clip: text; color: transparent; cursor: default; }
-        .stats-button {
-            background: var(--accent-primary);
-            color: white; border: none; padding: 0.6rem 1.2rem;
-            border-radius: 8px; cursor: pointer; font-weight: 600;
-            box-shadow: 0 0 15px var(--accent-glow);
-            transition: all 0.3s ease;
-        }
-        .stats-button:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 0 25px var(--accent-glow);
-        }
-        .container {
-            max-width: 1200px;
-            margin: 4rem auto;
-            padding: 0 2rem;
-        }
-        .hero { text-align: center; margin-bottom: 4rem; animation: fadeUp 1s ease-out; }
-        .hero h2 { font-size: 3rem; margin-bottom: 1rem; }
-        .hero p { color: #94a3b8; font-size: 1.2rem; max-width: 600px; margin: 0 auto; }
-        
-        @keyframes fadeUp {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
+{% extends 'base.html' %}
+{% block title %}StudySynth - Complete Course Catalog{% endblock %}
+{% block extra_head %}
+<!-- specific styling for catalog -->
+<style>
+    .hero {
+        text-align: center;
+        margin-bottom: 4rem;
+        animation: fadeUp 1s ease-out;
+    }
+
+    .hero h2 {
+        font-size: 3rem;
+        margin-bottom: 1rem;
+    }
+
+    .hero p {
+        color: #94a3b8;
+        font-size: 1.2rem;
+        max-width: 600px;
+        margin: 0 auto;
+    }
+
+    @keyframes fadeUp {
+        from {
+            opacity: 0;
+            transform: translateY(20px);
         }
 
-        .courses-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-            gap: 2rem;
-            animation: fadeUp 1.2s ease-out;
+        to {
+            opacity: 1;
+            transform: translateY(0);
         }
-        .course-card {
-            background: var(--card-bg);
-            border: 1px solid rgba(255,255,255,0.05);
-            border-radius: 16px;
-            padding: 2rem;
-            backdrop-filter: blur(12px);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-            display: flex;
-            flex-direction: column;
-        }
-        .course-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
-            border-color: rgba(255,255,255,0.1);
-        }
-        .badge {
-            align-self: flex-start;
-            background: rgba(56, 189, 248, 0.1);
-            color: #38bdf8;
-            padding: 0.3rem 0.8rem;
-            border-radius: 20px;
-            font-size: 0.8rem;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            font-weight: 600;
-        }
-        .course-title { font-size: 1.4rem; margin: 1rem 0; color: white; }
-        .course-desc { color: #cbd5e1; line-height: 1.6; font-size: 0.95rem; margin-bottom: auto; }
-        .play-btn {
-            display: inline-flex; align-items: center; justify-content: center;
-            margin-top: 1.5rem; width: auto; padding: 0.8rem;
-            background: rgba(255,255,255,0.05); color: white;
-            border: 1px solid rgba(255,255,255,0.1); border-radius: 8px;
-            text-decoration: none; transition: background 0.2s, transform 0.2s;
-        }
-        .play-btn:hover { background: rgba(255,255,255,0.1); transform: scale(1.02); }
-        
-        /* Modal Design */
-        #profile-modal {
-            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(0,0,0,0.8); backdrop-filter: blur(5px);
-            display: none; align-items: center; justify-content: center;
-            z-index: 100; opacity: 0; transition: opacity 0.3s;
-        }
-        .modal-content {
-            background: linear-gradient(135deg, #1e293b, #0f172a); 
-            padding: 3rem; border-radius: 20px;
-            width: 450px; text-align: center; border: 1px solid rgba(255,255,255,0.1);
-            position: relative; transform: scale(0.9); transition: transform 0.3s;
-            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
-        }
-        #profile-modal.show { display: flex; opacity: 1; }
-        #profile-modal.show .modal-content { transform: scale(1); }
-        .close-btn { position: absolute; top: 1rem; right: 1.5rem; color: #94a3b8; cursor: pointer; font-size: 2rem; line-height: 1; }
-        .close-btn:hover { color: white; }
-        .stat-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-top: 1.5rem; }
-        .stat-box { background: rgba(0,0,0,0.3); padding: 1.5rem; border-radius: 12px; border: 1px solid rgba(255,255,255,0.05); }
-        .stat-value { font-size: 2rem; font-weight: bold; color: #38bdf8; }
-        .stat-label { color: #94a3b8; font-size: 0.8rem; margin-top: 0.5rem; text-transform: uppercase; letter-spacing: 0.5px; }
-        
-        .loading { text-align: center; padding: 3rem; color: #94a3b8; font-size: 1.1rem; }
-        .error-msg { color: #ef4444; margin-top: 1rem; font-size: 1.1rem; }
-        .admin-link { display: inline-block; margin-top: 1.5rem; color: #38bdf8; text-decoration: none; border: 1px solid #38bdf8; padding: 0.5rem 1rem; border-radius: 6px; transition: all 0.2s; }
-        .admin-link:hover { background: #38bdf8; color: #0f172a; }
-    </style>
-</head>
-<body>
-    <nav>
-        <h1>StudySynth</h1>
-        <button class="stats-button" onclick="openProfile()">View My Statistics</button>
-    </nav>
-    
-    <div class="container">
-        <div class="hero">
-            <h2>Master New Skills, Supercharged with AI</h2>
-            <p>Select a premium course below and start accelerating your coding journey.</p>
-        </div>
-        
-        <div id="courses-container" class="courses-grid">
-            <div class="loading">Fetching premium courses securely...</div>
-        </div>
-    </div>
+    }
 
-    <!-- Profile Modal -->
-    <div id="profile-modal">
-        <div class="modal-content">
-            <span class="close-btn" onclick="closeProfile()">&times;</span>
-            <div id="modal-body">
-               <div class="loading">Syncing profile...</div>
-            </div>
-        </div>
-    </div>
+    .courses-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+        gap: 2rem;
+        animation: fadeUp 1.2s ease-out;
+    }
 
-    <script>
-        // Fetch courses dynamically from the custom DRF API
-        fetch('/api/courses/')
-            .then(res => res.json())
-            .then(data => {
-                const container = document.getElementById('courses-container');
-                if(data.length === 0) {
-                    container.innerHTML = '<div class="loading" style="grid-column: 1/-1;">No courses available yet. Seed them below or add via admin panel!</div>';
-                    return;
-                }
-                container.innerHTML = data.map(course => `
-                    <div class="course-card">
-                        <span class="badge">${course.category}</span>
-                        <h3 class="course-title">${course.title}</h3>
-                        <p class="course-desc">${course.description}</p>
-                        ${course.video_url 
-                            ? `<a href="${course.video_url}" target="_blank" class="play-btn">▶ Watch Video Lesson</a>` 
-                            : `<a href="#" class="play-btn">Resource Only</a>` }
-                    </div>
-                `).join('');
-            }).catch(err => {
-                document.getElementById('courses-container').innerHTML = '<div class="loading" style="grid-column: 1/-1;">Failed to load courses from API.</div>';
-            });
+    .course-card {
+        background: var(--card-bg);
+        border: 1px solid rgba(255, 255, 255, 0.05);
+        border-radius: 16px;
+        padding: 2rem;
+        backdrop-filter: blur(12px);
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        display: flex;
+        flex-direction: column;
+        text-decoration: none;
+        color: white;
+    }
 
-        function openProfile() {
-            const modal = document.getElementById('profile-modal');
-            modal.classList.add('show');
-            const mb = document.getElementById('modal-body');
-            mb.innerHTML = '<div class="loading">Loading stats...</div>';
-            
-            // Fetch stats from custom User API
-            fetch('/api/users/me/profile/')
-                .then(res => {
-                    if(res.status === 403 || res.status === 401) throw new Error("Authentication required.");
-                    return res.json();
-                })
-                .then(data => {
-                    mb.innerHTML = `
-                        <h2 style="color: white; margin-top: 0; margin-bottom: 0.5rem;">${data.user.username}'s Profile</h2>
-                        <p style="color: #94a3b8; margin-top: 0; margin-bottom: 2rem;">Member since ${new Date(data.created_at).getFullYear()}</p>
-                        <div class="stat-grid">
-                            <div class="stat-box">
-                                <div class="stat-value">${data.courses_enrolled}</div>
-                                <div class="stat-label">Enrolled</div>
-                            </div>
-                            <div class="stat-box">
-                                <div class="stat-value">${data.courses_completed}</div>
-                                <div class="stat-label">Complete</div>
-                            </div>
-                            <div class="stat-box">
-                                <div class="stat-value">${data.total_learning_hours}h</div>
-                                <div class="stat-label">Total Time</div>
-                            </div>
-                            <div class="stat-box">
-                                <div class="stat-value">${data.average_quiz_score}%</div>
-                                <div class="stat-label">Avg Score</div>
-                            </div>
-                        </div>
-                    `;
-                })
-                .catch(err => {
-                    mb.innerHTML = `
-                        <h2 style="color: white; margin-top: 0;">Access Denied</h2>
-                        <div class="error-msg">You are viewing this as a guest. Please log into your StudySynth account to view custom statistics.</div>
-                        <a href="/admin/" class="admin-link">Log In to Backend</a>
-                    `;
-                });
-        }
+    .course-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+        border-color: rgba(255, 255, 255, 0.1);
+    }
 
-        function closeProfile() {
-            document.getElementById('profile-modal').classList.remove('show');
-        }
-    </script>
-</body>
-</html>
+    .badge {
+        align-self: flex-start;
+        background: rgba(56, 189, 248, 0.1);
+        color: #38bdf8;
+        padding: 0.3rem 0.8rem;
+        border-radius: 20px;
+        font-size: 0.8rem;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        font-weight: 600;
+        margin-bottom: 1rem;
+    }
+
+    .course-title {
+        font-size: 1.4rem;
+        margin: 0 0 1rem 0;
+        color: white;
+    }
+
+    .course-desc {
+        color: #cbd5e1;
+        line-height: 1.6;
+        font-size: 0.95rem;
+        margin-bottom: auto;
+    }
+
+    .messages {
+        padding: 1rem;
+        background: rgba(239, 68, 68, 0.2);
+        border: 1px solid #ef4444;
+        border-radius: 8px;
+        margin-bottom: 2rem;
+        color: #fca5a5;
+    }
+</style>
+{% endblock %}
+{% block content %}
+<div class="hero">
+    <h2>Master New Skills, Supercharged with AI</h2>
+    <p>Select a premium course below and start accelerating your coding journey.</p>
+</div>
+
+{% if messages %}
+<div class="messages">
+    {% for message in messages %}
+    <p style="margin:0;">{{ message }}</p>
+    {% endfor %}
+</div>
+{% endif %}
+
+<div class="courses-grid">
+    {% for course in courses %}
+    <a href="{% url 'course-detail' course.id %}" class="course-card">
+        <span class="badge">{{ course.category.name|default:"Uncategorized" }}</span>
+        <h3 class="course-title">{{ course.title }}</h3>
+        <p class="course-desc">{{ course.description|truncatewords:20 }}</p>
+    </a>
+    {% empty %}
+    <p style="text-align:center; color:#94a3b8; grid-column:1/-1;">No courses available yet. Admins must add them.</p>
+    {% endfor %}
+</div>
+{% endblock %}

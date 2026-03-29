@@ -1,0 +1,82 @@
+{% extends 'base.html' %}
+{% block title %}Register - StudySynth{% endblock %}
+{% block extra_head %}
+<style>
+    .auth-card {
+        background: var(--card-bg);
+        border: 1px solid rgba(255, 255, 255, 0.05);
+        border-radius: 16px;
+        padding: 3rem;
+        backdrop-filter: blur(12px);
+        max-width: 400px;
+        margin: 2rem auto;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    }
+
+    .auth-card h2 {
+        margin-top: 0;
+        text-align: center;
+        margin-bottom: 2rem;
+    }
+
+    form p {
+        display: flex;
+        flex-direction: column;
+        margin-bottom: 1.5rem;
+    }
+
+    form label {
+        margin-bottom: 0.5rem;
+        color: #94a3b8;
+        font-size: 0.9rem;
+    }
+
+    form input {
+        background: rgba(0, 0, 0, 0.2);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        color: white;
+        padding: 0.8rem;
+        border-radius: 8px;
+        outline: none;
+        transition: border 0.3s;
+    }
+
+    form input:focus {
+        border-color: #3b82f6;
+    }
+
+    .helptext {
+        color: #94a3b8;
+        font-size: 0.75rem;
+        margin-top: 0.5rem;
+    }
+
+    .errorlist {
+        color: #ef4444;
+        font-size: 0.8rem;
+        margin-top: 0.5rem;
+        list-style: none;
+        padding: 0;
+    }
+
+    .submit-btn {
+        width: 100%;
+        text-align: center;
+        margin-top: 1rem;
+        font-size: 1.1rem;
+    }
+</style>
+{% endblock %}
+{% block content %}
+<div class="auth-card">
+    <h2>Create Your Account</h2>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="btn-primary submit-btn">Unlock Platform</button>
+    </form>
+    <p style="text-align: center; margin-top: 1.5rem; font-size: 0.9rem; color: #94a3b8;">
+        Already have an account? <a href="{% url 'login' %}" style="color: #38bdf8;">Log in</a>
+    </p>
+</div>
+{% endblock %}

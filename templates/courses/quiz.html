@@ -1,0 +1,70 @@
+{% extends 'base.html' %}
+{% block title %}Quiz: {{ quiz.title }} - StudySynth{% endblock %}
+{% block content %}
+<div
+    style="background: var(--card-bg); border-radius: 16px; padding: 4rem; max-width: 800px; margin: 0 auto; backdrop-filter: blur(12px); border: 1px solid rgba(255,255,255,0.05); box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);">
+    <a href="{% url 'lesson-detail' quiz.lesson.id %}"
+        style="color: #94a3b8; text-decoration: none; font-weight: 600;">&larr; Back to Lesson Summary</a>
+    <h1 style="margin-top: 1.5rem; color: #38bdf8; font-size: 2.2rem;">{{ quiz.title }}</h1>
+    <p
+        style="color: #cbd5e1; margin-bottom: 3rem; font-size: 1.1rem; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 1rem;">
+        Required Passing Score: <strong style="color: white;">{{ quiz.passing_score }}%</strong></p>
+
+    <form method="post">
+        {% csrf_token %}
+        {% for question in quiz.questions.all %}
+        <div
+            style="background: rgba(0,0,0,0.3); border: 1px solid rgba(255,255,255,0.05); padding: 2rem; border-radius: 12px; margin-bottom: 2.5rem;">
+            <h3 style="margin-top: 0; font-size: 1.3rem; color: white;">{{ forloop.counter }}. {{ question.text }}</h3>
+            <div style="display: flex; flex-direction: column; gap: 1rem; margin-top: 1.5rem;">
+                <label
+                    style="background: rgba(255,255,255,0.03); padding: 1.2rem; border-radius: 8px; cursor: pointer; transition: background 0.2s; border: 1px solid transparent;"><input
+                        type="radio" name="q_{{ question.id }}" value="A" required> <span style="margin-left: 10px;">{{
+                        question.option_a }}</span></label>
+                <label
+                    style="background: rgba(255,255,255,0.03); padding: 1.2rem; border-radius: 8px; cursor: pointer; transition: background 0.2s; border: 1px solid transparent;"><input
+                        type="radio" name="q_{{ question.id }}" value="B" required> <span style="margin-left: 10px;">{{
+                        question.option_b }}</span></label>
+                {% if question.option_c %}
+                <label
+                    style="background: rgba(255,255,255,0.03); padding: 1.2rem; border-radius: 8px; cursor: pointer; transition: background 0.2s; border: 1px solid transparent;"><input
+                        type="radio" name="q_{{ question.id }}" value="C" required> <span style="margin-left: 10px;">{{
+                        question.option_c }}</span></label>
+                {% endif %}
+                {% if question.option_d %}
+                <label
+                    style="background: rgba(255,255,255,0.03); padding: 1.2rem; border-radius: 8px; cursor: pointer; transition: background 0.2s; border: 1px solid transparent;"><input
+                        type="radio" name="q_{{ question.id }}" value="D" required> <span style="margin-left: 10px;">{{
+                        question.option_d }}</span></label>
+                {% endif %}
+            </div>
+        </div>
+        {% empty %}
+        <p
+            style="text-align: center; color: #ef4444; padding: 2rem; background: rgba(239, 68, 68, 0.1); border-radius: 8px;">
+            No questions established. An admin needs to sync the AI generator.</p>
+        {% endfor %}
+
+        {% if quiz.questions.count > 0 %}
+        <button type="submit" class="btn-primary"
+            style="width: 100%; font-size: 1.3rem; padding: 1.2rem; font-weight: bold; margin-top: 1rem;">Submit Final
+            Answers</button>
+        {% endif %}
+    </form>
+</div>
+
+<script>
+    // Simple interactive effect for radio choices
+    document.querySelectorAll('label').forEach(label => {
+        label.addEventListener('click', function () {
+            const siblings = this.parentElement.querySelectorAll('label');
+            siblings.forEach(s => {
+                s.style.background = 'rgba(255,255,255,0.03)';
+                s.style.borderColor = 'transparent';
+            });
+            this.style.background = 'rgba(59, 130, 246, 0.1)';
+            this.style.borderColor = '#3b82f6';
+        });
+    });
+</script>
+{% endblock %}

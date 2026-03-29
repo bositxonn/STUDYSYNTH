@@ -16,11 +16,23 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
-from django.views.generic import TemplateView
+from django.contrib.auth import views as auth_views
+from apps.users.views import RegisterView
+from apps.courses.ui_views import CatalogView, CourseDetailView, LessonView, QuizView
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/courses/', include('apps.courses.urls')),
     path('api/users/', include('apps.users.urls')),
-    path('', TemplateView.as_view(template_name='index.html'), name='home'),
+    
+    # Frontend Auth Routes
+    path('login/', auth_views.LoginView.as_view(template_name='auth/login.html'), name='login'),
+    path('logout/', auth_views.LogoutView.as_view(next_page='/'), name='logout'),
+    path('register/', RegisterView.as_view(), name='register'),
+    
+    # Frontend UI Routes
+    path('', CatalogView.as_view(), name='home'),
+    path('course/<int:pk>/', CourseDetailView.as_view(), name='course-detail'),
+    path('lesson/<int:pk>/', LessonView.as_view(), name='lesson-detail'),
+    path('quiz/<int:pk>/', QuizView.as_view(), name='quiz-detail'),
 ]
