@@ -8,10 +8,10 @@ msgid "StudySynth - Premium Learning"
 msgstr "StudySynth - Премиум Обучение"
 
 msgid "Toggle Theme"
-msgstr "Переключить тему"
+msgstr "Переключить Тему"
 
 msgid "Dashboard"
-msgstr "Панель управления"
+msgstr "Панель Управления"
 
 msgid "Logout"
 msgstr "Выйти"
@@ -35,7 +35,7 @@ msgid "All Fields"
 msgstr "Все Направления"
 
 msgid "Explore Course"
-msgstr "Подробнее о курсе"
+msgstr "Подробнее о Курсе"
 
 msgid "No courses found yet. Check back soon!"
 msgstr "Курсы пока не найдены. Заходите позже!"

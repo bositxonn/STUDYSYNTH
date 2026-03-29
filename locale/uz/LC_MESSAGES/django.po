@@ -8,10 +8,10 @@ msgid "StudySynth - Premium Learning"
 msgstr "StudySynth - Premium Ta'lim"
 
 msgid "Toggle Theme"
-msgstr "Mavzuni o'zgartirish"
+msgstr "Mavzuni O'zgartirish"
 
 msgid "Dashboard"
-msgstr "Boshqaruv paneli"
+msgstr "Boshqaruv Paneli"
 
 msgid "Logout"
 msgstr "Chiqish"
@@ -35,7 +35,7 @@ msgid "All Fields"
 msgstr "Barcha Yo'nalishlar"
 
 msgid "Explore Course"
-msgstr "Kursni ko'rish"
+msgstr "Kursni Ko'rish"
 
 msgid "No courses found yet. Check back soon!"
 msgstr "Kurslar hozircha topilmadi. Tez orada qaytib keling!"
