@@ -1,3 +1,4 @@
+{% load i18n %}
 <!DOCTYPE html>
 <html lang="en">
 
@@ -82,7 +83,29 @@
             width: 100%;
             box-sizing: border-box;
         }
+
+        [data-theme="light"] {
+            --bg-color: #f1f5f9;
+            --text-color: #0f172a;
+            --card-bg: rgba(255, 255, 255, 0.8);
+        }
+        [data-theme="light"] body {
+            background-image: radial-gradient(circle at top right, #e2e8f0, transparent 40%),
+                radial-gradient(circle at bottom left, #cbd5e1, transparent 40%);
+        }
+        [data-theme="light"] nav {
+            background: rgba(255, 255, 255, 0.8);
+            border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+        }
+        [data-theme="light"] nav a { color: #0f172a; }
+        [data-theme="light"] .course-card { color: #0f172a; }
+        [data-theme="light"] .course-title { color: #0f172a; }
+        [data-theme="light"] .course-desc { color: #475569; }
+        [data-theme="light"] .detail-card h1 { color: #0f172a !important; }
+        [data-theme="light"] .detail-card h4 { color: #0f172a !important; }
+        [data-theme="light"] .lesson-item { background: rgba(0,0,0,0.05); }
     </style>
+
     {% block extra_head %}{% endblock %}
 </head>
 
@@ -91,10 +114,28 @@
         <a href="{% url 'home' %}" style="margin:0; text-decoration:none;">
             <h1>StudySynth</h1>
         </a>
-        <div>
+        <div style="display: flex; align-items: center; gap: 1.5rem;">
+            <!-- Theme Toggle -->
+            <button id="theme-toggle" style="background: transparent; border: none; color: inherit; font-size: 1.2rem; cursor: pointer;" title="Toggle Dark/Light Mode">🌓</button>
+
+            <!-- Language Switcher -->
+            <form action="/i18n/setlang/" method="post" style="margin: 0; display: flex; align-items: center;">
+                {% csrf_token %}
+                <input name="next" type="hidden" value="{{ request.path }}">
+                <select name="language" onchange="this.form.submit()" style="background: transparent; color: inherit; border: 1px solid rgba(128,128,128,0.5); padding: 0.4rem; border-radius: 8px; outline: none; cursor: pointer; font-size: 0.9rem;">
+                    {% get_current_language as LANGUAGE_CODE %}
+                    {% get_available_languages as LANGUAGES %}
+                    {% for lang in LANGUAGES %}
+                    <option value="{{ lang.0 }}" {% if lang.0 == LANGUAGE_CODE %}selected{% endif %} style="color: black;">
+                        {{ lang.1 }}
+                    </option>
+                    {% endfor %}
+                </select>
+            </form>
+
             {% if user.is_authenticated %}
-            <a href="/admin/">Dashboard Logs</a>
-            <a href="{% url 'logout' %}">Logout ({{ user.username }})</a>
+            <a href="/admin/">Dashboard</a>
+            <a href="{% url 'logout' %}">Logout</a>
             {% else %}
             <a href="{% url 'login' %}">Login</a>
             <a href="{% url 'register' %}" class="btn-primary">Get Started</a>
@@ -105,6 +146,22 @@
         {% block content %}
         {% endblock %}
     </main>
+
+    <script>
+        const themeBtn = document.getElementById('theme-toggle');
+        const root = document.documentElement;
+
+        const savedTheme = localStorage.getItem('theme') || 'dark';
+        root.setAttribute('data-theme', savedTheme);
+
+        themeBtn.addEventListener('click', () => {
+            const currentTheme = root.getAttribute('data-theme');
+            const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+            root.setAttribute('data-theme', newTheme);
+            localStorage.setItem('theme', newTheme);
+        });
+    </script>
 </body>
+
 
 </html>
