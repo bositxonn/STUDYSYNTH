@@ -1,0 +1,51 @@
+# UZBEK TRANSLATIONS
+msgid ""
+msgstr ""
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: uz\n"
+
+msgid "Get Started"
+msgstr "Boshlash"
+
+msgid "Login"
+msgstr "Kirish"
+
+msgid "Logout"
+msgstr "Chiqish"
+
+msgid "Dashboard"
+msgstr "Boshqaruv paneli"
+
+msgid "Chegarasiz Ta'lim: Barcha Yo'nalishlar Bir Joyda"
+msgstr "Chegarasiz Ta'lim: Barcha Yo'nalishlar Bir Joyda"
+
+msgid "Barcha Yo'nalishlar"
+msgstr "Barcha Yo'nalishlar"
+
+msgid "Darsni Boshlash"
+msgstr "Darsni Boshlash"
+
+msgid "Course Curriculum"
+msgstr "Kurs Dasturi"
+
+msgid "Start Assessment"
+msgstr "Testni Boshlash"
+
+msgid "Submit Final Answers"
+msgstr "Javoblarni Yuborish"
+
+msgid "Welcome Back"
+msgstr "Xush Kelibsiz"
+
+msgid "Secure Login"
+msgstr "Kirish"
+
+msgid "Create Your Account"
+msgstr "Akkaunt Yaratish"
+
+msgid "Unlock Platform"
+msgstr "Ro'yxatdan O'tish"
+
+msgid "StudySynth"
+msgstr "StudySynth"

@@ -1,0 +1,51 @@
+# RUSSIAN TRANSLATIONS
+msgid ""
+msgstr ""
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: ru\n"
+
+msgid "Get Started"
+msgstr "Начать"
+
+msgid "Login"
+msgstr "Войти"
+
+msgid "Logout"
+msgstr "Выйти"
+
+msgid "Dashboard"
+msgstr "Панель управления"
+
+msgid "Chegarasiz Ta'lim: Barcha Yo'nalishlar Bir Joyda"
+msgstr "Безграничное Образование: Все Направления в Одном Месте"
+
+msgid "Barcha Yo'nalishlar"
+msgstr "Все Направления"
+
+msgid "Darsni Boshlash"
+msgstr "Начать Урок"
+
+msgid "Course Curriculum"
+msgstr "Учебная программа"
+
+msgid "Start Assessment"
+msgstr "Начать Тест"
+
+msgid "Submit Final Answers"
+msgstr "Отправить Ответы"
+
+msgid "Welcome Back"
+msgstr "Добро пожаловать"
+
+msgid "Secure Login"
+msgstr "Войти"
+
+msgid "Create Your Account"
+msgstr "Создать Аккаунт"
+
+msgid "Unlock Platform"
+msgstr "Зарегистрироваться"
+
+msgid "StudySynth"
+msgstr "StudySynth"

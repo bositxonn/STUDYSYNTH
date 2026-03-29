@@ -18,7 +18,36 @@
         [data-theme="light"] {
             --bg-color: #f1f5f9;
             --text-color: #0f172a;
-            --card-bg: rgba(255, 255, 255, 0.85);
+            --card-bg: rgba(255, 255, 255, 0.9);
+            --accent-primary: #3b82f6;
+            --accent-glow: rgba(59, 130, 246, 0.3);
+        }
+
+        /* Ensure all text is visible in light mode */
+        [data-theme="light"] .course-title,
+        [data-theme="light"] .course-card,
+        [data-theme="light"] h1,
+        [data-theme="light"] h2,
+        [data-theme="light"] h3,
+        [data-theme="light"] h4,
+        [data-theme="light"] p,
+        [data-theme="light"] li,
+        [data-theme="light"] label {
+            color: #0f172a !important;
+        }
+
+        [data-theme="light"] .course-desc,
+        [data-theme="light"] .hero p {
+            color: #475569 !important;
+        }
+
+        [data-theme="light"] .course-card {
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+            border-color: rgba(0, 0, 0, 0.07) !important;
+        }
+
+        [data-theme="light"] .lesson-item h4 {
+            color: #0f172a !important;
         }
 
         body {
@@ -177,7 +206,7 @@
                 {% get_available_languages as LANGUAGES %}
                 <select name="language" class="lang-select" onchange="document.getElementById('lang-form').submit()">
                     {% for lang_code, lang_name in LANGUAGES %}
-                    <option value="{{ lang_code }}" {% if lang_code == CURRENT_LANG %} selected{% endif %}>
+                    <option value="{{ lang_code }}" {% if lang_code==CURRENT_LANG %} selected{% endif %}>
                         {{ lang_name }}
                     </option>
                     {% endfor %}
