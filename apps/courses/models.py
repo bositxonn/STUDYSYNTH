@@ -22,7 +22,8 @@ class Course(models.Model):
     # Migrated to ForeignKey hierarchy:
     category = models.ForeignKey(Category, on_delete=models.SET_NULL, null=True, blank=True, related_name='courses')
     legacy_category = models.CharField(max_length=100, blank=True, null=True, help_text="Old flat category")
-    video_url = models.URLField(max_length=500, blank=True, null=True, help_text="Link to the video preview")
+    video_url = models.URLField(max_length=500, blank=True, null=True, help_text="Tashqi havola (YouTube / Vimeo)")
+    video_file = models.FileField(upload_to="videos/courses/", blank=True, null=True, help_text="Kompyuterdan MP4 video yuklash")
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
@@ -35,7 +36,8 @@ class Course(models.Model):
 class Lesson(models.Model):
     course = models.ForeignKey(Course, on_delete=models.CASCADE, related_name='lessons')
     title = models.CharField(max_length=255)
-    video_url = models.URLField(max_length=500)
+    video_url = models.URLField(max_length=500, blank=True, null=True, help_text="Tashqi havola")
+    video_file = models.FileField(upload_to="videos/lessons/", blank=True, null=True, help_text="Kompyuterdan MP4 video yuklash")
     order = models.PositiveIntegerField(default=1)
     transcript = models.TextField(blank=True, null=True, help_text="Used for AI test generation")
 

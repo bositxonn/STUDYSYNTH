@@ -16,6 +16,8 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
+from django.conf import settings
+from django.conf.urls.static import static
 from django.contrib.auth import views as auth_views
 from apps.users.views import RegisterView
 from apps.courses.ui_views import CatalogView, CourseDetailView, LessonView, QuizView
@@ -36,3 +38,6 @@ urlpatterns = [
     path('lesson/<int:pk>/', LessonView.as_view(), name='lesson-detail'),
     path('quiz/<int:pk>/', QuizView.as_view(), name='quiz-detail'),
 ]
+
+if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

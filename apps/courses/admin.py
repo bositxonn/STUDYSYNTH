@@ -18,6 +18,6 @@ class CourseAdmin(admin.ModelAdmin):
             'fields': ('title', 'description', 'category', 'legacy_category')
         }),
         ('Media', {
-            'fields': ('video_url',)
+            'fields': ('video_url', 'video_file')
         }),
     )
