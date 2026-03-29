@@ -120,6 +120,8 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/6.0/howto/static-files/
 
 STATIC_URL = 'static/'
+STATICFILES_DIRS = [BASE_DIR / 'static']
+
 
 
 JAZZMIN_SETTINGS = {
@@ -151,6 +153,7 @@ JAZZMIN_SETTINGS = {
     'default_icon_parents': 'fas fa-chevron-circle-right',
     'default_icon_children': 'fas fa-circle',
     'show_ui_builder': True,
+    'custom_css': 'css/admin_custom.css',
 }
 
 
@@ -163,7 +166,7 @@ JAZZMIN_UI_TWEAKS = {
     "brand_colour": "navbar-white",
     "accent": "accent-primary",
     "navbar": "navbar-white navbar-light",
-    "no_navbar_border": False,
+    "no_navbar_border": True,
     "navbar_fixed": True,
     "layout_boxed": False,
     "footer_fixed": False,
@@ -174,9 +177,9 @@ JAZZMIN_UI_TWEAKS = {
     "sidebar_nav_child_indent": True,
     "sidebar_nav_compact_style": False,
     "sidebar_nav_legacy_style": False,
-    "sidebar_nav_flat_style": True,
-    "theme": "lumen",
-    "dark_mode_theme": None,
+    "sidebar_nav_flat_style": False,
+    "theme": "litera",
+    "dark_mode_theme": "darkly",
     "button_classes": {
         "primary": "btn-primary",
         "secondary": "btn-secondary",
@@ -185,6 +188,7 @@ JAZZMIN_UI_TWEAKS = {
         "danger": "btn-danger",
         "success": "btn-success"
     }
+}
 }
 
 

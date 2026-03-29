@@ -1,0 +1,81 @@
+
+/* Smart Home Dashboard - Light/Dark Mode CSS Overrides */
+:root {
+    --sh-bg-light: #f4f6f9;
+    --sh-card-shadow: 0 4px 20px rgba(0,0,0,0.06);
+    --sh-radius: 12px;
+    --sh-accent: #6c5ce7;
+}
+
+body.dark-mode {
+    --sh-bg-light: #121212;
+    --sh-card-shadow: 0 4px 20px rgba(0,0,0,0.4);
+    --sh-accent: #a29bfe;
+}
+
+body {
+    background-color: var(--sh-bg-light) !important;
+    font-family: 'Inter', system-ui, sans-serif;
+}
+
+.content-wrapper {
+    background-color: var(--sh-bg-light) !important;
+}
+
+.card {
+    border: none !important;
+    border-radius: var(--sh-radius) !important;
+    box-shadow: var(--sh-card-shadow) !important;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(0,0,0,0.12) !important;
+}
+body.dark-mode .card:hover {
+    box-shadow: 0 8px 25px rgba(0,0,0,0.6) !important;
+}
+
+/* Navbar */
+.main-header {
+    border-bottom: none !important;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.03);
+}
+body.dark-mode .main-header { box-shadow: 0 2px 10px rgba(0,0,0,0.3); }
+
+/* Sidebar Pills */
+.nav-sidebar .nav-item > .nav-link {
+    border-radius: 8px !important;
+    margin: 5px 12px;
+    transition: all 0.2s ease-in;
+    color: #4b5563;
+}
+body.dark-mode .nav-sidebar .nav-item > .nav-link {
+    color: #d1d5db;
+}
+.nav-sidebar .nav-item > .nav-link.active {
+    background-color: rgba(108, 92, 231, 0.1) !important;
+    color: var(--sh-accent) !important;
+    box-shadow: none !important;
+    font-weight: 600;
+}
+body.dark-mode .nav-sidebar .nav-item > .nav-link.active {
+    background-color: rgba(162, 155, 254, 0.15) !important;
+}
+
+.brand-link {
+    border-bottom: none !important;
+    font-weight: 800;
+    color: var(--sh-accent) !important;
+}
+
+/* Beautiful Rounded Buttons */
+.btn {
+    border-radius: 8px !important;
+    text-transform: none !important;
+    font-weight: 500;
+}
+.btn-primary {
+    background-color: var(--sh-accent) !important;
+    border-color: var(--sh-accent) !important;
+}
