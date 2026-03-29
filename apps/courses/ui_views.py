@@ -25,7 +25,9 @@ class LessonView(LoginRequiredMixin, DetailView):
     context_object_name = 'lesson'
     
     def dispatch(self, request, *args, **kwargs):
-        if not request.user.is_authenticated or not request.user.subscriptions.filter(is_active=True).exists():
+        if not request.user.is_authenticated:
+            return redirect('login')
+        if not request.user.is_superuser and not request.user.subscriptions.filter(is_active=True).exists():
             messages.error(request, "A premium subscription is required to access learning materials.")
             return redirect('home')
         return super().dispatch(request, *args, **kwargs)
@@ -34,6 +36,14 @@ class QuizView(LoginRequiredMixin, DetailView):
     model = Quiz
     template_name = 'courses/quiz.html'
     context_object_name = 'quiz'
+
+    def dispatch(self, request, *args, **kwargs):
+        if not request.user.is_authenticated:
+            return redirect('login')
+        if not request.user.is_superuser and not request.user.subscriptions.filter(is_active=True).exists():
+            messages.error(request, "A premium subscription is required to access learning materials.")
+            return redirect('home')
+        return super().dispatch(request, *args, **kwargs)
 
     def post(self, request, *args, **kwargs):
         quiz = self.get_object()
