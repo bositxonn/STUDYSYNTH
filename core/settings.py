@@ -47,6 +47,7 @@ INSTALLED_APPS = [
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'django.middleware.locale.LocaleMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
@@ -113,6 +114,14 @@ TIME_ZONE = 'UTC'
 
 USE_I18N = True
 
+LANGUAGES = [
+    ('en', 'English'),
+    ('ru', 'Русский'),
+    ('uz', "O'zbek"),
+]
+LOCALE_PATHS = [BASE_DIR / 'locale']
+
+
 USE_TZ = True
 
 
@@ -153,6 +162,7 @@ JAZZMIN_SETTINGS = {
     'default_icon_parents': 'fas fa-chevron-circle-right',
     'default_icon_children': 'fas fa-circle',
     'show_ui_builder': True,
+    'language_chooser': True,
     'custom_css': 'css/admin_custom.css',
 }
 

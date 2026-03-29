@@ -23,6 +23,7 @@ from apps.users.views import RegisterView
 from apps.courses.ui_views import CatalogView, CourseDetailView, LessonView, QuizView
 
 urlpatterns = [
+    path('i18n/', include('django.conf.urls.i18n')),
     path('admin/', admin.site.urls),
     path('api/courses/', include('apps.courses.urls')),
     path('api/users/', include('apps.users.urls')),
