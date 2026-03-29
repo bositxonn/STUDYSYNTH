@@ -31,6 +31,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    'jazzmin',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -119,3 +120,42 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/6.0/howto/static-files/
 
 STATIC_URL = 'static/'
+
+
+JAZZMIN_SETTINGS = {
+    'site_title': 'StudySynth Admin',
+    'site_header': 'StudySynth',
+    'site_brand': 'StudySynth Platform',
+    'welcome_sign': 'Welcome to the StudySynth Administrator Panel',
+    'copyright': 'StudySynth Education',
+    'search_model': ['auth.User', 'courses.Course'],
+    'topmenu_links': [
+        {'name': 'Home',  'url': 'admin:index', 'permissions': ['auth.view_user']},
+        {'name': 'View User Portal', 'url': '/', 'new_window': True},
+    ],
+    'show_sidebar': True,
+    'navigation_expanded': True,
+    'icons': {
+        'auth': 'fas fa-users-cog',
+        'auth.user': 'fas fa-user',
+        'courses.Course': 'fas fa-graduation-cap',
+        'courses.Lesson': 'fas fa-play-circle',
+        'courses.Category': 'fas fa-tags',
+        'courses.Field': 'fas fa-layer-group',
+        'courses.Quiz': 'fas fa-vial',
+        'courses.Question': 'fas fa-question-circle',
+        'subscriptions.Tariff': 'fas fa-money-bill-wave',
+        'subscriptions.Subscription': 'fas fa-file-contract',
+        'users.UserProfile': 'fas fa-id-card',
+    },
+    'default_icon_parents': 'fas fa-chevron-circle-right',
+    'default_icon_children': 'fas fa-circle',
+    'show_ui_builder': True,
+}
+
+JAZZMIN_UI_TWEAKS = {
+    'navbar': 'navbar-dark',
+    'theme': 'darkly',
+    'sidebar': 'sidebar-dark-primary',
+    'brand_colour': 'navbar-dark',
+}
